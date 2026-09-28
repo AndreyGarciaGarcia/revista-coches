@@ -1,0 +1,244 @@
+:root {
+    --oscuro: #1e1e2f;
+    --acento: #00acc1;
+    --acento-oscuro: #00838f;
+    --fondo: #f4f5f7;
+    --texto: #222;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--acento-oscuro);
+}
+
+/* Cabecera */
+header {
+    background-color: var(--oscuro);
+    padding: 16px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+header h1 a {
+    color: white;
+    text-decoration: none;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+}
+
+nav a {
+    color: #4dd0e1;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #666;
+}
+
+/* Tarjetas (rejilla que se adapta sola) */
+.noticias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.tarjeta {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.tarjeta h2 {
+    margin: 6px 0;
+    font-size: 1.15rem;
+}
+
+.tarjeta h2 a {
+    color: var(--oscuro);
+    text-decoration: none;
+}
+
+.tarjeta h2 a:hover {
+    color: var(--acento-oscuro);
+}
+
+.tarjeta img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.etiqueta {
+    background-color: #ffca28;
+    color: var(--texto);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+/* Noticia y ficha */
+.noticia {
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.noticia img {
+    max-width: 100%;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.autor {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.ficha {
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.ficha th,
+.ficha td {
+    text-align: left;
+    padding: 8px 20px 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Filtros */
+.filtros {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filtros a {
+    background-color: var(--oscuro);
+    color: white;
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+}
+
+.filtros a:hover {
+    background-color: var(--acento-oscuro);
+}
+
+/* Formularios */
+.formulario {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 700px;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.formulario button {
+    background-color: var(--oscuro);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.formulario button:hover {
+    background-color: var(--acento-oscuro);
+}
+
+/* Panel de administración */
+.tabla-admin {
+    width: 100%;
+    background-color: white;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.tabla-admin th,
+.tabla-admin td {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Móvil */
+@media (max-width: 700px) {
+    header {
+        padding: 14px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    main {
+        margin: 20px auto;
+    }
+
+    .noticia,
+    .formulario {
+        padding: 20px;
+    }
+
+    .tabla-admin {
+        display: block;
+        overflow-x: auto;
+    }
+}
