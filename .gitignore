@@ -1,0 +1,36 @@
+# Configuración real (credenciales): nunca se sube al repositorio
+.env
+
+# Dependencias y build
+/vendor/
+/node_modules/
+/public/build/
+composer.lock
+
+# Directorios de ejecución
+/storage/cache/*
+/storage/logs/*
+/storage/sessions/*
+!/storage/cache/.gitkeep
+!/storage/logs/.gitkeep
+!/storage/sessions/.gitkeep
+
+# Copias de seguridad de la base de datos
+/backups/
+*.sql.gz
+*.sql.bz2
+
+# Imágenes descargadas desde Wikimedia Commons y miniaturas de vídeo:
+# se regeneran con `php scripts/install.php` (o los scripts sueltos
+# descargar-imagenes.php / descargar-galeria.php / descargar-videos.php)
+/public/assets/img/cars/*.jpg
+/public/assets/img/cars/*/*.jpg
+/public/assets/img/news/*.jpg
+/public/assets/img/hero/*.jpg
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log
+.idea/
+.vscode/

@@ -1,0 +1,44 @@
+# =====================================================================
+#  MotorPress — .htaccess de la raíz del proyecto
+#  DocumentRoot real de Apache es C:/xampp/htdocs, así que esta capa
+#  redirige internamente todo el tráfico hacia public/.
+# =====================================================================
+
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # ---------------------------------------------------------------
+    # 0. Nunca servir ficheros ocultos (.env, .git, .htaccess, .user.ini…)
+    # ---------------------------------------------------------------
+    RewriteRule (^|/)\.(?!well-known) - [R=404,NC,L]
+
+    # ---------------------------------------------------------------
+    # 1. Bloquear el código fuente, la configuración y los datos
+    #    (defensa en profundidad: dentro de cada carpeta hay otro
+    #    .htaccess con "Require all denied")
+    # ---------------------------------------------------------------
+    RewriteRule ^(app|config|database|storage|templates|scripts|tests|backups|vendor)(/|$) - [R=404,NC,L]
+
+    # ---------------------------------------------------------------
+    # 2. Si la petición ya apunta a public/, dejar que public/.htaccess
+    #    resuelva (si es un fichero lo sirve, si no va a index.php)
+    # ---------------------------------------------------------------
+    RewriteRule ^public(/|$) - [L]
+
+    # ---------------------------------------------------------------
+    # 3. Todo lo demás se resuelve dentro de public/:
+    #      - existe el fichero  -> lo sirve Apache
+    #      - no existe          -> public/.htaccess -> public/index.php
+    # ---------------------------------------------------------------
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
+
+# Bloqueo alternativo si mod_rewrite no estuviera disponible
+<IfModule !mod_rewrite.c>
+    <FilesMatch "^(\.env|\.git|composer\.(json|lock))$">
+        Require all denied
+    </FilesMatch>
+</IfModule>

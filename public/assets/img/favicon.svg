@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="MotorPress">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0071e3"/>
+      <stop offset=".55" stop-color="#4f46e5"/>
+      <stop offset="1" stop-color="#6b46d9"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="#0b0d10"/>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#g)" opacity=".18"/>
+  <path d="M14 46V18h6.6l11.4 17.2L43.4 18H50v28h-6.4V29.4L33.6 44h-3.2L20.4 29.4V46z" fill="#fff"/>
+  <circle cx="47.5" cy="21.5" r="3.4" fill="#0071e3"/>
+</svg>

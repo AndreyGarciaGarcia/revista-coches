@@ -1,0 +1,55 @@
+# =====================================================================
+#  MotorPress — public/.htaccess  (árbol que sí es visible en la web)
+# =====================================================================
+
+Options -Indexes -MultiViews
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Ficheros reales y directorios -> se sirven tal cual
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Cualquier otra petición (URLs limpias) -> front controller
+    RewriteRule ^ index.php [QSA,L]
+</IfModule>
+
+# ---------------------------------------------------------------------
+#  Cabeceras de seguridad
+# ---------------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    # X-Frame-Options y Referrer-Policy los decide la aplicación: el panel
+    # y la puerta de acceso salen con DENY / no-referrer y el resto del
+    # sitio con SAMEORIGIN / strict-origin. No se fijan aquí porque
+    # mod_headers se aplica al final y anularía el valor de PHP.
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header set Cross-Origin-Opener-Policy "same-origin"
+    Header unset X-Powered-By
+    Header unset Server
+</IfModule>
+
+# ---------------------------------------------------------------------
+#  Caché: larga para contenido versionado, corta para el HTML
+# ---------------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# Bloquear el acceso directo al front controller por HTTP sin rewrite
+<FilesMatch "\.(env|ini|log|sql|md|json|lock)$">
+    Require all denied
+</FilesMatch>

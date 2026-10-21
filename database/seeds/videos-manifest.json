@@ -1,0 +1,302 @@
+{
+    "audi-a4": [
+        {
+            "plataforma": "youtube",
+            "codigo": "OY-P2sGQPfE",
+            "titulo": "AUDI A4 | Prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "14:28",
+            "miniatura": "assets/img/cars/audi-a4/video-01.jpg"
+        }
+    ],
+    "audi-q8-etron": [
+        {
+            "plataforma": "youtube",
+            "codigo": "0EFJ9YFSoZE",
+            "titulo": "AUDI Q8 Sportback e-tron | Prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "16:40",
+            "miniatura": "assets/img/cars/audi-q8-etron/video-01.jpg"
+        }
+    ],
+    "bmw-i4": [
+        {
+            "plataforma": "youtube",
+            "codigo": "xL-vUUPAuAc",
+            "titulo": "BMW i4 eDrive40 | Prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "19:39",
+            "miniatura": "assets/img/cars/bmw-i4/video-01.jpg"
+        }
+    ],
+    "bmw-serie-3": [
+        {
+            "plataforma": "youtube",
+            "codigo": "szMotShzcWQ",
+            "titulo": "EXCELENCIA ✅ BMW SERIE 3 | Prueba",
+            "canal": "Motor․es",
+            "duracion": "12:07",
+            "miniatura": "assets/img/cars/bmw-serie-3/video-01.jpg"
+        }
+    ],
+    "cupra-born": [
+        {
+            "plataforma": "youtube",
+            "codigo": "C2DPD6kMgOM",
+            "titulo": "Cupra Born 2023 review",
+            "canal": "carwow",
+            "duracion": "13:12",
+            "miniatura": "assets/img/cars/cupra-born/video-01.jpg"
+        }
+    ],
+    "cupra-formentor": [
+        {
+            "plataforma": "youtube",
+            "codigo": "qcWRZK9TlF0",
+            "titulo": "NEW Cupra Formentor Review – Better than an Audi Q3?",
+            "canal": "What Car?",
+            "duracion": "19:59",
+            "miniatura": "assets/img/cars/cupra-formentor/video-01.jpg"
+        }
+    ],
+    "dacia-duster": [
+        {
+            "plataforma": "youtube",
+            "codigo": "kTg15fqB0vw",
+            "titulo": "Dacia DUSTER: (Todavía) más coche | Prueba Novedad / Test SUV / Review en español",
+            "canal": "coches.net",
+            "duracion": "17:09",
+            "miniatura": "assets/img/cars/dacia-duster/video-01.jpg"
+        }
+    ],
+    "ford-mach-e": [
+        {
+            "plataforma": "youtube",
+            "codigo": "SiuyXf0je44",
+            "titulo": "Comparativa Ford Mustang Mach-E - Tesla Model Y | Prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "33:14",
+            "miniatura": "assets/img/cars/ford-mach-e/video-01.jpg"
+        }
+    ],
+    "ford-puma": [
+        {
+            "plataforma": "youtube",
+            "codigo": "HmbxoM38Jrw",
+            "titulo": "Ford Puma 2024 | Prueba completa / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "17:06",
+            "miniatura": "assets/img/cars/ford-puma/video-01.jpg"
+        }
+    ],
+    "hyundai-ioniq5": [
+        {
+            "plataforma": "youtube",
+            "codigo": "7evcsy_CGSY",
+            "titulo": "Hyundai IONIQ 5 | Primera prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "17:38",
+            "miniatura": "assets/img/cars/hyundai-ioniq5/video-01.jpg"
+        }
+    ],
+    "hyundai-tucson": [
+        {
+            "plataforma": "youtube",
+            "codigo": "NAFr6g5eGn8",
+            "titulo": "Here it is, the bigger Hyundai Tucson! // 2027 Hyundai Tucson review",
+            "canal": "Motormouth",
+            "duracion": "13:28",
+            "miniatura": "assets/img/cars/hyundai-tucson/video-01.jpg"
+        }
+    ],
+    "kia-niro": [
+        {
+            "plataforma": "youtube",
+            "codigo": "L1ec7qEhthA",
+            "titulo": "New Kia Niro review: The only car you’ll ever need?",
+            "canal": "carwow",
+            "duracion": "13:17",
+            "miniatura": "assets/img/cars/kia-niro/video-01.jpg"
+        }
+    ],
+    "mazda-cx5": [
+        {
+            "plataforma": "youtube",
+            "codigo": "gHpiY8Z0eQ4",
+            "titulo": "Mazda CX-5  2026 | Prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "23:30",
+            "miniatura": "assets/img/cars/mazda-cx5/video-01.jpg"
+        }
+    ],
+    "mercedes-clase-c": [
+        {
+            "plataforma": "youtube",
+            "codigo": "hV7s9RuJLuM",
+            "titulo": "Mercedes-Benz CLASE C: Esto ya es otra cosa (distinta) | Prueba / Review en español",
+            "canal": "coches.net",
+            "duracion": "15:37",
+            "miniatura": "assets/img/cars/mercedes-clase-c/video-01.jpg"
+        }
+    ],
+    "mercedes-eqe": [
+        {
+            "plataforma": "youtube",
+            "codigo": "6BSdq-MpPdg",
+            "titulo": "My Mercedes EQE review... triggers German police!",
+            "canal": "carwow",
+            "duracion": "11:42",
+            "miniatura": "assets/img/cars/mercedes-eqe/video-01.jpg"
+        }
+    ],
+    "nissan-qashqai": [
+        {
+            "plataforma": "youtube",
+            "codigo": "lGxci9a9Xps",
+            "titulo": "NEW Nissan Qashqai review – is this SUV back on top? | What Car?",
+            "canal": "What Car?",
+            "duracion": "12:26",
+            "miniatura": "assets/img/cars/nissan-qashqai/video-01.jpg"
+        }
+    ],
+    "peugeot-3008": [
+        {
+            "plataforma": "youtube",
+            "codigo": "sck4EMLjbJw",
+            "titulo": "Peugeot 3008 - ¡Esto sí es originalidad! | Reseña ",
+            "canal": "AutoDinámico",
+            "duracion": "17:28",
+            "miniatura": "assets/img/cars/peugeot-3008/video-01.jpg"
+        }
+    ],
+    "peugeot-308": [
+        {
+            "plataforma": "youtube",
+            "codigo": "HB18fQX6Rn8",
+            "titulo": "Peugeot 308 | Primera prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "17:18",
+            "miniatura": "assets/img/cars/peugeot-308/video-01.jpg"
+        }
+    ],
+    "porsche-911": [
+        {
+            "plataforma": "youtube",
+            "codigo": "idvHE1VGP8g",
+            "titulo": "NEW Porsche 911 review – is it REALLY that great?",
+            "canal": "What Car?",
+            "duracion": "11:36",
+            "miniatura": "assets/img/cars/porsche-911/video-01.jpg"
+        }
+    ],
+    "renault-clio": [
+        {
+            "plataforma": "youtube",
+            "codigo": "Yp1kh4g37k8",
+            "titulo": "¡Nuevo RENAULT CLIO! Primera Prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "16:34",
+            "miniatura": "assets/img/cars/renault-clio/video-01.jpg"
+        }
+    ],
+    "renault-megane": [
+        {
+            "plataforma": "youtube",
+            "codigo": "G-cZqnc4i6s",
+            "titulo": "Test Drive 1.600 km Renault Megane E-Tech 2024 ¿El mejor compacto eléctrico? #TestDrive",
+            "canal": "Kilómetros Eléctricos",
+            "duracion": "48:24",
+            "miniatura": "assets/img/cars/renault-megane/video-01.jpg"
+        }
+    ],
+    "seat-leon": [
+        {
+            "plataforma": "youtube",
+            "codigo": "ubUavz9Xe-g",
+            "titulo": "SEAT LEÓN | Prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "27:16",
+            "miniatura": "assets/img/cars/seat-leon/video-01.jpg"
+        }
+    ],
+    "skoda-octavia": [
+        {
+            "plataforma": "youtube",
+            "codigo": "M_eu4LcbLl0",
+            "titulo": "Skoda Octavia 1.5 TSI 150 CV | Prueba / Test / Review en español | coches.net",
+            "canal": "coches.net",
+            "duracion": "13:03",
+            "miniatura": "assets/img/cars/skoda-octavia/video-01.jpg"
+        }
+    ],
+    "tesla-model-3": [
+        {
+            "plataforma": "youtube",
+            "codigo": "XTeWKmlNmN8",
+            "titulo": "Driving Tesla's Cheapest Car | First Review of the 2026 Tesla Model 3 Standard",
+            "canal": "Edmunds Cars",
+            "duracion": "10:41",
+            "miniatura": "assets/img/cars/tesla-model-3/video-01.jpg"
+        }
+    ],
+    "tesla-model-y": [
+        {
+            "plataforma": "youtube",
+            "codigo": "oiKYco-DLTM",
+            "titulo": "NEW Tesla Model Y REVIEW! – we drive this updated electric SUV | What Car?",
+            "canal": "What Car?",
+            "duracion": "17:11",
+            "miniatura": "assets/img/cars/tesla-model-y/video-01.jpg"
+        }
+    ],
+    "toyota-corolla": [
+        {
+            "plataforma": "youtube",
+            "codigo": "Y0tcDV_50hk",
+            "titulo": "Toyota Corolla 2020 in-depth review | carwow Reviews",
+            "canal": "carwow",
+            "duracion": "16:29",
+            "miniatura": "assets/img/cars/toyota-corolla/video-01.jpg"
+        }
+    ],
+    "toyota-rav4": [
+        {
+            "plataforma": "youtube",
+            "codigo": "YeyyJzIXoU4",
+            "titulo": "New Toyota RAV4 Review – Better than a Kia Sportage?",
+            "canal": "What Car?",
+            "duracion": "17:53",
+            "miniatura": "assets/img/cars/toyota-rav4/video-01.jpg"
+        }
+    ],
+    "volvo-xc60": [
+        {
+            "plataforma": "youtube",
+            "codigo": "l_khyUHunXA",
+            "titulo": "Volvo XC60 2026: el más vendido de su historia se renueva | Prueba | Review Coches.com",
+            "canal": "coches.com",
+            "duracion": "21:03",
+            "miniatura": "assets/img/cars/volvo-xc60/video-01.jpg"
+        }
+    ],
+    "vw-golf": [
+        {
+            "plataforma": "youtube",
+            "codigo": "E2cr8Xkg_KI",
+            "titulo": "VW Golf: The Only Car You’ll Ever Actually Need?",
+            "canal": "carwow",
+            "duracion": "16:37",
+            "miniatura": "assets/img/cars/vw-golf/video-01.jpg"
+        }
+    ],
+    "vw-id4": [
+        {
+            "plataforma": "youtube",
+            "codigo": "QN2pYGXySpw",
+            "titulo": "Volkswagen ID.4 Pro \"Más\" / Prueba / Review en español | Centímetros Cúbicos",
+            "canal": "Centímetros cúbicos",
+            "duracion": "4:32",
+            "miniatura": "assets/img/cars/vw-id4/video-01.jpg"
+        }
+    ]
+}
