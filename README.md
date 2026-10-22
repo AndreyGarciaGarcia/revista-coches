@@ -122,8 +122,9 @@ http://localhost/ruta-del-proyecto/admin
 
 Si el `DocumentRoot` de Apache es la raíz de XAMPP (`C:/xampp/htdocs`), el `.htaccess` de la raíz del proyecto redirige todo el tráfico hacia `public/`, de modo que **sólo ese directorio queda expuesto**.
 
-**Acceso de administrador** (sembrado por defecto): `admin@motorpress.dev` / `Admin2026!`
-Cámbialo en cuanto instales. Si pierdes la contraseña:
+**Acceso de administrador**: el correo de `ADMIN_EMAIL` y la contraseña de `ADMIN_PASSWORD`,
+ambas definidas en tu `.env` (que nunca se sube al repositorio). El instalador imprime la
+contraseña una sola vez por consola: apúntala en tu gestor de contraseñas. Si la pierdes:
 
 ```bash
 php scripts/make-admin.php --listar

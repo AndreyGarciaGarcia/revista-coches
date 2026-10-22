@@ -7,6 +7,7 @@
  *
  *   php scripts/make-admin.php correo@ejemplo.com
  *   php scripts/make-admin.php correo@ejemplo.com --rol=root
+ *   php scripts/make-admin.php correo@ejemplo.com --pass='Frase'  cambia su contraseña
  *   php scripts/make-admin.php --nuevo=correo@ejemplo.com --pass='Frase'
  *   php scripts/make-admin.php --listar
  *
@@ -188,6 +189,39 @@ if ($usuario === null) {
     fwrite(STDERR, "No existe ninguna cuenta con ese correo: {$email}\n");
     fwrite(STDERR, "Créala con: php scripts/make-admin.php --nuevo={$email} --pass='…'\n");
     exit(1);
+}
+
+// ---------------------------------------------------------------------
+//  Cambio de contraseña de una cuenta existente
+//  (vía de recuperación: si la contraseña queda perdida o publicada por
+//  error, se sustituye desde la consola sin tocar la base de datos)
+// ---------------------------------------------------------------------
+
+if (isset($opciones['pass'])) {
+    if (mb_strlen($contrasena) < 10) {
+        fwrite(STDERR, "La contraseña debe tener al menos 10 caracteres.\n");
+        fwrite(STDERR, "Repítela con --pass='Frase larga y segura 2026!'\n");
+        exit(1);
+    }
+
+    $db->update('usuarios', [
+        'password_hash'  => Auth::hash($contrasena),
+        'actualizado_en' => date('Y-m-d H:i:s'),
+    ], ['id' => (int) $usuario['id']]);
+
+    $auditar('usuario.password', [
+        'id'     => (int) $usuario['id'],
+        'email'  => $email,
+        'origen' => 'consola',
+    ]);
+
+    echo "\n  ✔ Contraseña actualizada para {$email}.\n";
+    echo "    Anótala: no se guarda ni se vuelve a mostrar en claro.\n";
+
+    if ((int) $usuario['rol_id'] === (int) $rol['id']) {
+        echo "    Rol sin cambios («{$rol['nombre']}»).\n\n";
+        exit(0);
+    }
 }
 
 if ((int) $usuario['rol_id'] === (int) $rol['id']) {
