@@ -60,7 +60,11 @@ final class Migrator
 
         $out = [];
         foreach ($files as $file) {
-            $out[basename($file)] = (string) md5_file($file);
+            // El hash se calcula sobre el contenido normalizado a LF: git
+            // puede convertir las finales de línea al clonar en Windows y el
+            // checksum registrado en base de datos debe seguir cuadrando.
+            $contenido = str_replace("\r\n", "\n", (string) file_get_contents($file));
+            $out[basename($file)] = md5($contenido);
         }
 
         return $out;

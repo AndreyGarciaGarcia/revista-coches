@@ -1,6 +1,10 @@
 # MotorPress — Revista de coches
 
-**Revista digital + catálogo completo de vehículos**, con estética corporativa sobria (azul marino, grises neutros, superficies planas y filetes visibles) y catálogo tipo *coches.net*: portada editorial, noticias con comentarios, ficha técnica de coches, filtros avanzados, comparador, buscador global, API REST pública y panel de administración completo.
+**Revista digital + catálogo completo de vehículos**, con estética de **prensa de motor**: blanco
+y negro con un único acento rojo de señal (`#d1261b`), titulares condensados en Oswald y rejilla
+editorial. Incluye portada, noticias con comentarios, ficha técnica de coches, filtros avanzados,
+comparador, buscador global, API REST pública y panel de administración **blindado con clave
+maestra y segundo factor TOTP**.
 
 Construido **sin frameworks ni dependencias externas**: PHP 8, MySQL 8, JavaScript vanilla y CSS propio.
 
@@ -22,7 +26,8 @@ Construido **sin frameworks ni dependencias externas**: PHP 8, MySQL 8, JavaScri
 12. [Copias de seguridad y restauración](#12-copias-de-seguridad-y-restauración)
 13. [Mantenimiento programado](#13-mantenimiento-programado)
 14. [Solución de problemas](#14-solución-de-problemas)
-15. [Créditos](#15-créditos)
+15. [Despliegue en producción](#15-despliegue-en-producción)
+16. [Créditos](#16-créditos)
 
 ---
 
@@ -275,13 +280,16 @@ Todos se ejecutan desde la raíz del proyecto y comparten `scripts/bootstrap.php
 | `php scripts/descargar-videos.php [--solo=…] [--por-coche=1] [--limpiar]` | Busca vídeo del modelo, valida el título y guarda miniatura local |
 | `php scripts/make-admin.php --listar` | Cuentas y roles existentes |
 | `php scripts/make-admin.php correo@x.com --rol=root` | Eleva privilegios (queda en auditoría) |
+| `php scripts/make-admin.php correo@x.com --pass='…'` | Cambia la contraseña de una cuenta existente (rotación / recuperación) |
 | `php scripts/panel_clave.php` | Genera (o rota) la clave maestra del panel y guarda su hash en `.env` |
 | `php scripts/panel_clave.php --verifica TEXTO` | Comprueba si una clave coincide con `PANEL_CLAVE_HASH` |
 | `php scripts/panel_clave.php --desactiva-totp` | Borra el 2FA de `ADMIN_EMAIL` si pierdes el móvil (vuelta a emparejar) |
 | `php scripts/backup.php [--keep=10] [--no-data] [--tabla=a,b]` | Volcado `.sql.gz` con tablas, vistas, triggers y rutinas |
 | `php scripts/restaurar.php <fichero> [--db=otro] [--yes]` | Restauración con verificación posterior |
 | `php scripts/limpieza.php [--dry-run] [--dias=30]` | Sesiones, caché, logs, ventanas vencidas, imágenes huérfanas |
-| `php scripts/smoke.php [--verbose]` | Recorre las 78 rutas y detecta 5xx, avisos de PHP y SQL rota |
+| `php scripts/desplegar.php [--produccion]` | Comprobación previa al despliegue: PHP, `.env`, BD, esquema, permisos y rutas críticas |
+| `php scripts/desplegar.php --url=https://…` | Comprobación del sitio ya publicado (API, cabeceras, barreras del panel, HTTPS) |
+| `php scripts/smoke.php [--verbose]` | Recorre las rutas GET y detecta 5xx, avisos de PHP y SQL rota |
 
 > **`--limpiar` respeta el material del panel**: borra sólo lo que el propio
 > script descargó. Las fotografías subidas desde el panel
@@ -336,9 +344,12 @@ curl "http://localhost/ruta/api/v1/coches?categoria=suv&precio_max=30000&limite=
 php scripts/smoke.php             # recorre las 46 rutas GET
 php scripts/smoke.php --verbose   # detalle de cada incidencia
 php scripts/smoke.php --sin-admin # sólo la parte pública
+php scripts/desplegar.php         # entorno, BD, esquema (vistas/rutinas/disparadores) y rutas críticas
 ```
 
 El *smoke* comprueba, para cada ruta: código de estado (2xx/3xx), que el cuerpo no esté vacío, ausencia de `Warning/Notice/Deprecated`, ausencia de `SQLSTATE[` en la salida y, además, **las líneas nuevas escritas en `storage/logs/errors.log` durante la ejecución**. Sale con código `1` si hay incidencias: apto para integración continua.
+
+`desplegar.php` añade lo que el *smoke* no ve: configuración del `.env`, migraciones aplicadas y **sin alterar**, cuentas activas, permisos de escritura y —con credenciales de mantenimiento— que el esquema conserva sus vistas, rutinas y disparadores (el usuario de aplicación no tiene privilegio `TRIGGER`, así que no puede verlos; son ellos quienes rellenan `slug` y `uuid` al crear contenido).
 
 Comprobaciones manuales recomendadas tras un cambio:
 
@@ -413,7 +424,91 @@ Ejemplo de tarea programada (Linux/macOS), a las 04:00:
 
 ---
 
-## 15. Créditos
+## 15. Despliegue en producción
+
+El sitio corre en **cualquier alojamiento PHP 8.1+ con MySQL 8, Apache, `mod_rewrite` y
+`mod_headers`**: sin Composer, sin Node, sin paso de build y sin SSH. Dos recetas:
+
+| | **A · Hosting PHP gratuito** | **B · Oracle Cloud Always Free** |
+|---|---|---|
+| Coste | 0 € | 0 € (VM siempre encendida) |
+| Administración | ninguna (panel gráfico) | hay que montar y mantener el servidor |
+| HTTPS | certificado del propio hosting | Let's Encrypt (`certbot`) |
+| Ideal para | lanzar cuanto antes | control total y crecimiento |
+
+Comprueba el entorno antes y después de subir nada:
+
+```bash
+php scripts/desplegar.php --produccion                       # entorno local listo para producción
+php scripts/desplegar.php --url=https://tudominio.com        # el sitio ya subido, medido por HTTP
+```
+
+### Ruta A · Hosting PHP gratuito
+
+1. **Esquema y usuario**: créalos desde el panel del hosting (o usa los que te asignen).
+2. **Sube el código** por FTP o gestor de ficheros: todo **excepto** `.env`, `storage/cache/*`,
+   `storage/logs/*`, `storage/sessions/*` y `backups/`.
+3. **Importa los datos**: genera la copia aquí (`php scripts/backup.php`) y súbela; en
+   phpMyAdmin, *Importar* sobre el esquema nuevo. El volcado incluye esquema, datos, vistas,
+   triggers y rutinas, así que **no hace falta ejecutar scripts en el servidor**.
+4. **`.env`** en la raíz (copia `.env.example` y rellena):
+   - `APP_URL=https://tudominio.com`, `APP_ENV=production`, `APP_DEBUG=false`
+   - `APP_KEY` = 32 bytes aleatorios → `php -r "echo bin2hex(random_bytes(16));"`
+   - `DB_HOST`, `DB_NAME`, `DB_USER`, `DB_PASS`, `ADMIN_EMAIL`, `ADMIN_PASSWORD`
+   - `PANEL_CLAVE_HASH` (cópialo de tu `.env` local: es la misma clave maestra que ya usas)
+   - `REGISTRO_ABIERTO=false`, `PANEL_NIVEL=90`, `PANEL_INACTIVIDAD=900`
+5. **DocumentRoot** hacia `public/`. Si el hosting obliga a que la raíz sea la del proyecto, ya
+   está previsto: el `.htaccess` de la raíz redirige todo hacia `public/`.
+6. **Permisos de escritura**: `storage/` y `public/assets/img/subidas/`.
+7. **Tareas programadas** (si tu panel ofrece cron): las dos líneas de §13 (limpieza diaria y
+   copia semanal).
+8. **Verifica**: `php scripts/desplegar.php --url=https://tudominio.com` y entra en `/acceso`.
+
+### Ruta B · Oracle Cloud Always Free
+
+```bash
+# 1. VM Ubuntu 24.04 (ARM Ampere A1 o AMD E2.1.Micro), puertos 80 y 443 abiertos en la Security List
+sudo apt update && sudo apt install -y apache2 libapache2-mod-php8.2 php8.2-mysql \
+    php8.2-mbstring php8.2-xml php8.2-curl mysql-server certbot python3-certbot-apache
+sudo a2enmod rewrite headers
+
+# 2. Base de datos: esquema y usuario de aplicación con privilegios SÓLO de DML (sin CREATE/GRANT)
+sudo mysql -e "CREATE DATABASE revista_coches CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+               CREATE USER 'revista_app'@'localhost' IDENTIFIED BY 'Contraseña-Larga-2026';
+               GRANT SELECT, INSERT, UPDATE, DELETE ON revista_coches.* TO 'revista_app'@'localhost';"
+
+# 3. Código y configuración
+git clone https://github.com/AndreyGarciaGarcia/revista-coches.git /var/www/motorpress
+cp /var/www/motorpress/.env.example /var/www/motorpress/.env    # y rellénalo como en la ruta A
+
+# 4. DocumentRoot → /var/www/motorpress/public (VirtualHost) y permisos
+sudo chown -R www-data:www-data /var/www/motorpress/storage /var/www/motorpress/public/assets/img/subidas
+
+# 5. Datos, verificación y HTTPS
+php /var/www/motorpress/scripts/install.php        # o importa la copia de backup.php
+php /var/www/motorpress/scripts/migrate.php
+php /var/www/motorpress/scripts/desplegar.php --produccion
+php /var/www/motorpress/scripts/smoke.php
+sudo certbot --apache -d tudominio.com
+
+# 6. Firewall y tareas programadas (§13)
+sudo ufw allow OpenSSH && sudo ufw allow 80 && sudo ufw allow 443 && sudo ufw enable
+```
+
+### Tras el despliegue
+
+- Entra en `/acceso` con `ADMIN_EMAIL` + contraseña + **clave maestra**, y activa el segundo
+  factor desde `/admin/seguridad` escaneando el QR.
+- Comprueba desde fuera: `/registro` → `404`, `/admin` sin sesión → `401`, y que las respuestas
+  del panel llevan `X-Frame-Options: DENY`.
+- `.env` jamás se sube al repositorio; si la copia de seguridad sale fuera de tus servidores,
+  cifra el `.sql.gz` antes de moverlo.
+- Guarda la clave maestra y la contraseña en tu gestor de contraseñas: son las dos piezas que
+  sólo tienes tú.
+
+---
+
+## 16. Créditos
 
 - **Fotografías**: Wikimedia Commons, licencias libres (CC BY‑SA / CC0 / dominio público). Autoría, licencia y enlace de origen en `database/seeds/imagenes-manifest.json`, en `public/assets/img/CREDITOS.md` y en la página `/creditos`.
 - **Galería y vídeo de cada ficha**: 4 tomas adicionales por vehículo clasificadas como exterior, interior, motor o detalle (filtro en la propia página) y un vídeo por modelo. Las miniaturas de vídeo son locales: YouTube **no** se contacta hasta que el visitante pulsa reproducir (CSP `frame-src` limitado a `youtube-nocookie.com`).
